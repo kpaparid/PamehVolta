@@ -9,10 +9,12 @@ import android.view.View;
 import android.widget.Button;
 
 import new_volta.NewVoltaActivity;
+import user_profile.ProfileActivity;
 
 public class MainActivity extends AppCompatActivity {
 
     Button btn;
+    Button btnProf;
 
 
     @Override
@@ -26,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, NewVoltaActivity.class);
+                startActivity(intent);
+            }
+        });
+        btnProf = (Button) findViewById(R.id.btnProf);
+
+        btnProf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });

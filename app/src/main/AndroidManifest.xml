@@ -20,6 +20,9 @@
         <activity
             android:name="new_volta.NewVoltaActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name="user_profile.ProfileActivity"
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
