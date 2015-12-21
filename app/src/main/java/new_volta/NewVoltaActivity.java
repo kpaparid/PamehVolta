@@ -19,12 +19,12 @@ public class NewVoltaActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_new_volta);
         txtDate = (EditText) findViewById(R.id.editDate);
         //txtDate.setFocusable(false);
-        txtDate.setKeyListener(null);
+        //txtDate.setKeyListener(null);
         txtTime = (EditText)findViewById(R.id.editTime);
-        txtTime.setKeyListener(null);
+        //txtTime.setKeyListener(null);
         //TypeFaceUtil.overrideFont(getApplicationContext(), "SERIF", "LDFComicSans.ttf");
     }
 
