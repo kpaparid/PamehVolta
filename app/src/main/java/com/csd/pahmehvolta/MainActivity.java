@@ -15,6 +15,7 @@ public class MainActivity extends AppCompatActivity {
 
     Button btn;
     Button btnProf;
+    Button btnTabs;
 
 
     @Override
@@ -31,12 +32,23 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         btnProf = (Button) findViewById(R.id.btnProf);
 
         btnProf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btnTabs = (Button) findViewById(R.id.btnTabs);
+
+        btnTabs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, ThreeTabbedScreen.class);
                 startActivity(intent);
             }
         });

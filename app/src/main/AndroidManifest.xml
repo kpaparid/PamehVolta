@@ -16,13 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name="new_volta.NewVoltaActivity"
             android:label="@string/app_name" />
         <activity
             android:name="user_profile.ProfileActivity"
             android:label="@string/app_name" />
+        <activity
+            android:name=".ThreeTabbedScreen"
+            android:label="@string/title_activity_three_tabbed_screen" >
+        </activity>
     </application>
 
 </manifest>
