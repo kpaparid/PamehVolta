@@ -1,5 +1,6 @@
 package user_profile;
 
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -7,7 +8,9 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,9 +18,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 
+import com.csd.pahmehvolta.BaseActivity;
 import com.csd.pahmehvolta.R;
 
-public class ProfileActivity extends AppCompatActivity {
+public class ProfileActivity extends BaseActivity {
 
 
     public void init(){
@@ -90,6 +94,9 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tab_profile);
+
+
+
         init();
         TextView tv=(TextView)findViewById(R.id.textView2);
         //Typeface face=Typeface.createFromAsset(getAssets(),"Exo2-ThinCondensed.otf");

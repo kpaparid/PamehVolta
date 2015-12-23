@@ -1,18 +1,22 @@
 package new_volta;
 
 
+        import android.content.Context;
+        import android.support.v7.app.ActionBar;
         import android.support.v7.app.ActionBarActivity;
         import android.os.Bundle;
+        import android.view.LayoutInflater;
         import android.view.Menu;
         import android.view.MenuItem;
         import android.view.View;
         import android.widget.*;
         import android.graphics.Typeface;
 
+        import com.csd.pahmehvolta.BaseActivity;
         import com.csd.pahmehvolta.R;
 
 
-public class NewVoltaActivity extends ActionBarActivity {
+public class NewVoltaActivity extends BaseActivity {
 
     private EditText txtDate;
     private EditText txtTime;
@@ -20,6 +24,20 @@ public class NewVoltaActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_volta);
+
+
+        //action bar
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(false);
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
+        LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = inflator.inflate(R.layout.action_bar, null);
+
+        actionBar.setCustomView(view);
+
+
         txtDate = (EditText) findViewById(R.id.editDate);
         //txtDate.setFocusable(false);
         //txtDate.setKeyListener(null);

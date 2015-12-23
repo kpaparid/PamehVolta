@@ -24,39 +24,6 @@
             android:layout_height="match_parent">
 
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="0dp"
-                android:paddingBottom="10dp">
-
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:background="#251a5e"
-                    android:padding="0dp"
-                    android:paddingTop="0dp">
-
-                    <ImageButton
-                        android:id="@+id/imageButton11"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="2dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_marginTop="0dp"
-                        android:adjustViewBounds="true"
-                        android:padding="1dp"
-                        android:scaleType="fitXY"
-                        android:src="@drawable/pv"
-                        android:background="#00000000" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
