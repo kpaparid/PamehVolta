@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
@@ -18,6 +19,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import new_volta.NewVoltaActivity;
 
 public class ThreeTabbedScreen extends BaseActivity {
 
@@ -99,7 +102,16 @@ public class ThreeTabbedScreen extends BaseActivity {
                 view = act.getLayoutInflater().inflate(R.layout.tab_voltes_screen,
                         container, false);
 
+                FloatingActionButton btnNew;
+                btnNew = (FloatingActionButton) view.findViewById(R.id.plusFAB);
 
+                btnNew.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ThreeTabbedScreen.this, NewVoltaActivity.class);
+                        startActivity(intent);
+                    }
+                });
 
             }
             else if (position == 1) {

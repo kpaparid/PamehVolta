@@ -26,6 +26,8 @@
             android:name=".ThreeTabbedScreen"
             android:label="@string/title_activity_three_tabbed_screen" >
         </activity>
+
+
     </application>
 
 </manifest>
