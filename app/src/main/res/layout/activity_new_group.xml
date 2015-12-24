@@ -1,136 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#300edd">
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:paddingBottom="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="New Volta!"
-            android:id="@+id/textView"
+            android:text="New Group!"
+            android:id="@+id/title"
             android:layout_gravity="center_horizontal"
             android:textColor="#ffffff" />
+
     </LinearLayout>
 
     <TableLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:stretchColumns="1"
-        android:shrinkColumns="1">
+        android:shrinkColumns="1"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Title"
-                android:id="@+id/txtTitle"
-                android:layout_column="0"
-                android:layout_marginRight="15dp"
-                android:textColor="#ffffff" />
+            <ImageButton
+                android:id="@+id/btnProfileImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:scaleType="centerCrop"
+                android:layout_gravity="center"
+                android:background="#00000000"
+                android:src="@drawable/avatar" />
 
             <EditText
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/editTitle"
-                android:singleLine="true"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/editGroupName"
                 android:layout_column="1"
-                android:layout_span="2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Date"
-                android:id="@+id/txtDate"
-                android:textColor="@android:color/background_light" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/editDate" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Date"
-                android:id="@+id/btnDate"
-                android:onClick="setDate"
-                android:layout_column="2" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Time"
-                android:id="@+id/txtTime"
-                android:textColor="@android:color/background_light" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="time"
-                android:ems="10"
-                android:id="@+id/editTime" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Time"
-                android:onClick="setTime"
-                android:id="@+id/btnTime" />
-        </TableRow>
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Place"
-                android:id="@+id/txtPlace"
-                android:textColor="#ffffff" />
-
-            <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText4"
-                android:layout_column="1" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Map"
-                android:id="@+id/btnMap"
-                android:layout_column="2" />
+                android:layout_gravity="bottom|right"
+                android:hint="Group title..."
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
         </TableRow>
 
         <TableRow
@@ -150,7 +75,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Choose"
-                android:id="@+id/btnPeople"
+                android:id="@+id/btnChoosePeople"
                 android:layout_column="1"
                 android:layout_span="2" />
         </TableRow>
@@ -221,7 +146,8 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:paddingBottom="20dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -271,16 +197,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageButton
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/btnVolta"
-                android:background="@drawable/btn"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Message"
+                android:id="@+id/txtMessage"
+                android:layout_column="0"
+                android:textColor="#ffffff" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/editMessage"
+                android:singleLine="true"
+                android:layout_column="1"/>
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnAddGroup"
+
                 android:layout_column="0"
                 android:layout_span="3"
-                android:layout_marginTop="5dp" />
+                android:layout_marginTop="5dp"
+                android:text="Add" />
         </TableRow>
 
     </TableLayout>
+
 
 </LinearLayout>

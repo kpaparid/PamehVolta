@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#300edd">
 
 
 
@@ -13,18 +14,37 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:layout_marginTop="10dp"
+            android:paddingBottom="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Voltes!"
+                android:id="@+id/textView16"
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
             android:id="@+id/viewA"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1" >
+            android:layout_weight="1"
+            android:layout_marginTop="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Feed"
-                android:id="@+id/txtFeed" />
+                android:id="@+id/txtFeed"
+                android:textColor="#ffffff" />
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -45,14 +65,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Ongoing Voltes"
-                android:id="@+id/txtNewVoltes" />
+                android:id="@+id/txtNewVoltes"
+                android:textColor="#ffffff" />
 
             <ScrollView
                 android:layout_width="match_parent"

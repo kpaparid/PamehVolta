@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import new_group.NewGroupActivity;
 import new_volta.NewVoltaActivity;
 
 public class ThreeTabbedScreen extends BaseActivity {
@@ -115,8 +116,21 @@ public class ThreeTabbedScreen extends BaseActivity {
 
             }
             else if (position == 1) {
+
                 view = act.getLayoutInflater().inflate(R.layout.tab_group_list,
                         container, false);
+
+                FloatingActionButton btnNew;
+                btnNew = (FloatingActionButton) view.findViewById(R.id.plusGroupsFAB);
+
+                btnNew.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(ThreeTabbedScreen.this, NewGroupActivity.class);
+                        startActivity(intent);
+                    }
+                });
+
 
 
 
