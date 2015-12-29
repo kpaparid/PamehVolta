@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import login.LoginActivity;
 import new_volta.NewVoltaActivity;
 import user_profile.ProfileActivity;
 
@@ -21,6 +22,7 @@ public class MainActivity extends BaseActivity {
     Button btn;
     Button btnProf;
     Button btnTabs;
+    Button btnLogin;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -53,6 +55,7 @@ public class MainActivity extends BaseActivity {
 
         btn = (Button) findViewById(R.id.btnNewVolta);
 
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,6 +83,17 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
             }
         });
+
+        btnLogin = (Button) findViewById(R.id.btnLogin);
+
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     @Override

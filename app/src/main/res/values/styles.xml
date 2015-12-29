@@ -2,8 +2,6 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="actionBarSize">60dip</item>
-        <item name="android:actionBarSize">60dip</item>
         <!-- Customize your theme here. -->
     </style>
 
