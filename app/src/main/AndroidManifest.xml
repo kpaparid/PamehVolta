@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:noHistory="true" >
 			<intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,12 +35,10 @@
         <activity
             android:name=".ThreeTabbedScreen"
             android:label="@string/title_activity_three_tabbed_screen" >
-            
         </activity>
 		<activity
             android:name="login.LoginActivity"
-            android:label="@string/title_activity_login">
-           
+            android:label="@string/title_activity_login" >
         </activity>
         <activity android:name="com.facebook.FacebookActivity"
             android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"

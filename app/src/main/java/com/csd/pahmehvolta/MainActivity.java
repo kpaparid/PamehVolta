@@ -19,10 +19,6 @@ import user_profile.ProfileActivity;
 
 public class MainActivity extends BaseActivity {
 
-    Button btn;
-    Button btnProf;
-    Button btnTabs;
-    Button btnLogin;
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -38,8 +34,6 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setDisplayShowHomeEnabled(false);
 //        actionBar.setDisplayShowCustomEnabled(true);
@@ -49,51 +43,8 @@ public class MainActivity extends BaseActivity {
 //        Toolbar parent =(Toolbar) customView.getParent();
 //        parent.setContentInsetsAbsolute(0, 0);
 
-
-
-
-
-        btn = (Button) findViewById(R.id.btnNewVolta);
-
-
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, NewVoltaActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnProf = (Button) findViewById(R.id.btnProf);
-
-        btnProf.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ProfileActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        btnTabs = (Button) findViewById(R.id.btnTabs);
-
-        btnTabs.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, ThreeTabbedScreen.class);
-                startActivity(intent);
-            }
-        });
-
-        btnLogin = (Button) findViewById(R.id.btnLogin);
-
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
-            }
-        });
-
+        Intent i = new Intent(this, ThreeTabbedScreen.class);
+        startActivity(i);
     }
 
     @Override

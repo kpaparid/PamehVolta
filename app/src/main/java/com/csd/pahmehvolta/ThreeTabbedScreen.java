@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import login.LoginActivity;
 import new_group.NewGroupActivity;
 import new_volta.NewVoltaActivity;
 
@@ -61,7 +62,7 @@ public class ThreeTabbedScreen extends BaseActivity {
          */
         @Override
         public int getCount() {
-            return 3;
+            return 4;
         }
 
         /**
@@ -85,7 +86,8 @@ public class ThreeTabbedScreen extends BaseActivity {
         public CharSequence getPageTitle(int position) {
             if (position == 0) return "Voltes";
             else if (position == 1) return "Groups";
-            else return "Profile";
+            else if (position == 2) return "Profile";
+            else return "Other";
         }
         // END_INCLUDE (pageradapter_getpagetitle)
 
@@ -100,19 +102,11 @@ public class ThreeTabbedScreen extends BaseActivity {
             View view;
 
             if (position == 0) {
+
                 view = act.getLayoutInflater().inflate(R.layout.tab_voltes_screen,
                         container, false);
 
-                FloatingActionButton btnNew;
-                btnNew = (FloatingActionButton) view.findViewById(R.id.plusFAB);
-
-                btnNew.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ThreeTabbedScreen.this, NewVoltaActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                firstTab(view);
 
             }
             else if (position == 1) {
@@ -120,29 +114,26 @@ public class ThreeTabbedScreen extends BaseActivity {
                 view = act.getLayoutInflater().inflate(R.layout.tab_group_list,
                         container, false);
 
-                FloatingActionButton btnNew;
-                btnNew = (FloatingActionButton) view.findViewById(R.id.plusGroupsFAB);
-
-                btnNew.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(ThreeTabbedScreen.this, NewGroupActivity.class);
-                        startActivity(intent);
-                    }
-                });
-
-
-
+                secondTab(view);
 
             }
-            else {
+            else if (position == 2) {
+
                 view  = act.getLayoutInflater().inflate(R.layout.tab_profile,
                         container, false);
 
-
-
+                thirdTab(view);
 
             }
+            else {
+
+                view  = act.getLayoutInflater().inflate(R.layout.other_utilities,
+                        container, false);
+
+                fourthTab(view);
+
+            }
+
             // Add the newly created View to the ViewPager
             container.addView(view);
 
@@ -181,5 +172,48 @@ public class ThreeTabbedScreen extends BaseActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void firstTab(View view) {
+        FloatingActionButton btnNew;
+        btnNew = (FloatingActionButton) view.findViewById(R.id.plusFAB);
+
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreeTabbedScreen.this, NewVoltaActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void secondTab(View view) {
+        FloatingActionButton btnNew;
+        btnNew = (FloatingActionButton) view.findViewById(R.id.plusGroupsFAB);
+
+        btnNew.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreeTabbedScreen.this, NewGroupActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void thirdTab(View view) {
+
+    }
+
+    public void fourthTab(View view) {
+        Button loginBtn = (Button) view.findViewById(R.id.loginBtn);
+        Button registerBtn = (Button) view.findViewById(R.id.registerBtn);
+
+        loginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreeTabbedScreen.this, LoginActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
