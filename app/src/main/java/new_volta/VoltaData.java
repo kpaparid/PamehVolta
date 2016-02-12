@@ -2,6 +2,7 @@ package new_volta;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -9,19 +10,20 @@ import java.util.Date;
  */
 public class VoltaData implements Serializable {
 
-    String title,date,time,place,comment;
+    String title,time,place,comment;
+    Date date;
 
     //the ids or the names of the invited friends
     ArrayList<String> ids;
 
-    public VoltaData(String title, String date, String time, String place, String comment) {
+    public VoltaData(String title, Date date, String time, String place, String comment) {
         this.title = title;
         this.date = date;
         this.time = time;
         this.place = place;
         this.comment = comment;
     }
-    public VoltaData(String title, String date, String time, String place, ArrayList<String>ids, String comment) {
+    public VoltaData(String title, Date date, String time, String place, ArrayList<String>ids, String comment) {
 
         this.ids= new ArrayList<>();
         this.ids.addAll(ids);
@@ -41,11 +43,23 @@ public class VoltaData implements Serializable {
         this.title = title;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
+    public String getDateString(){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        StringBuilder sb =new StringBuilder();
+        sb.append(cal.get(Calendar.YEAR));
+        sb.append("-").append(cal.get(Calendar.MONTH));
+        sb.append("-").append(cal.get(Calendar.DAY_OF_MONTH));
+        sb.append(" ").append(cal.get(Calendar.HOUR_OF_DAY));
+        sb.append(":").append(cal.get(Calendar.MINUTE));
+        sb.append(":00");
+        return sb.toString();
+    }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

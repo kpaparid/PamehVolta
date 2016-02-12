@@ -1,56 +1,49 @@
 package new_volta;
 
 
-        import android.app.FragmentTransaction;
-        import android.content.Context;
-        import android.os.AsyncTask;
-        import android.support.v7.app.ActionBar;
-        import android.support.v7.app.ActionBarActivity;
-        import android.os.Bundle;
-        import android.text.Html;
-        import android.text.Spanned;
-        import android.util.Log;
-        import android.view.LayoutInflater;
-        import android.view.Menu;
-        import android.view.MenuItem;
-        import android.view.View;
-        import android.widget.*;
-        import android.graphics.Typeface;
+import android.app.DatePickerDialog;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.AsyncTask;
+import android.support.v7.app.ActionBar;
+import android.os.Bundle;
+import android.text.Html;
+import android.text.Spanned;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.*;
 
-        import com.csd.pahmehvolta.BaseActivity;
-        import com.csd.pahmehvolta.R;
+import com.csd.pahmehvolta.BaseActivity;
+import com.csd.pahmehvolta.R;
 
-        import java.io.BufferedReader;
-        import java.io.BufferedWriter;
-        import java.io.IOException;
-        import java.io.InputStreamReader;
-        import java.io.OutputStream;
-        import java.io.OutputStreamWriter;
-        import java.io.UnsupportedEncodingException;
-        import java.net.HttpURLConnection;
-        import java.net.URL;
-        import java.net.URLEncoder;
-        import java.text.DateFormat;
-        import java.text.ParseException;
-        import java.text.SimpleDateFormat;
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.Calendar;
-        import java.util.Date;
-        import java.util.GregorianCalendar;
-        import java.util.HashMap;
-        import java.util.Locale;
-        import java.util.Map;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
-        import javax.net.ssl.HttpsURLConnection;
-
-        import login.HttpHandler;
+import javax.net.ssl.HttpsURLConnection;
 
 
 public class NewVoltaActivity extends BaseActivity {
 
-    private EditText txtDate,txtTime;
-    private EditText title,place,comment;
+    private EditText editDate, editTime;
+    private EditText editTitle, editPlace, editComment;
 
     private static final String SAVE_VOLTA_URL = "http://koufalex.webpages.auth.gr/volta/newVolta.php" ;
 
@@ -74,16 +67,13 @@ public class NewVoltaActivity extends BaseActivity {
         actionBar.setCustomView(view);
 
 
-        txtDate = (EditText) findViewById(R.id.editDate);
-        //txtDate.setFocusable(false);
-        //txtDate.setKeyListener(null);
-        txtTime = (EditText)findViewById(R.id.editTime);
-        //txtTime.setKeyListener(null);
-        //TypeFaceUtil.overrideFont(getApplicationContext(), "SERIF", "LDFComicSans.ttf");
+        editDate = (EditText) findViewById(R.id.editDate);
 
-        title  = (EditText) findViewById(R.id.editTitle);
-        place  = (EditText) findViewById(R.id.editPlace);
-        comment  = (EditText) findViewById(R.id.editComment);
+        editTime = (EditText)findViewById(R.id.editTime);
+
+        editTitle = (EditText) findViewById(R.id.editTitle);
+        editPlace = (EditText) findViewById(R.id.editPlace);
+        editComment = (EditText) findViewById(R.id.editComment);
 
     }
 
@@ -97,88 +87,104 @@ public class NewVoltaActivity extends BaseActivity {
 
     public void setDate(View view)
     {
-        DatePicker pickerDialog = new DatePicker();
-        pickerDialog.setText(txtDate);
-        pickerDialog.show(getFragmentManager(), "picker");
+
+        Calendar c = Calendar.getInstance();
+        int mYear = c.get(Calendar.YEAR);
+        int mMonth = c.get(Calendar.MONTH);
+        int mDay = c.get(Calendar.DAY_OF_MONTH);
+        DatePickerDialog dialog = new DatePickerDialog(this,
+                new CustomDatePicker(editDate), mYear, mMonth, mDay);
+        dialog.getDatePicker().setMinDate(System.currentTimeMillis());
+        dialog.show();
 
     }
 
-    public void setTime(View view)
-    {
+    public void setTime(View view) {
         TimePicker dialog = new TimePicker();
-        dialog.setText(txtTime);
+        dialog.setText(editTime);
         dialog.show(getFragmentManager(), "time_picker");
     }
 
+
+
     public void saveVolta(View view)
     {
-        Log.d(TAG,"sto save Volta");
+        View focusTo=null;
 
-        /*
-        title.getText()
-        txtDate.getText()
-        txtTime.getText()
-        place.getText()
+        if (editTitle.getText().toString().isEmpty()){
+            //if editTitle is empty return and focus to editTitle edit field
+            Toast toast = Toast.makeText(getApplicationContext(),"Title is required",Toast.LENGTH_SHORT);
+            toast.show();
+            focusTo = editTitle;
+        }else if(editDate.getText().toString().isEmpty()|| editTime.getText().toString().isEmpty()){
+            //case either date or editTitle (or both) is empty
+            Toast toast = Toast.makeText(getApplicationContext(),"Date and time are required",Toast.LENGTH_SHORT);
+            toast.show();
+            if(editTime.getText().toString().isEmpty()){
+                focusTo= editTime;
+            }
+            if(editDate.getText().toString().isEmpty()){
+                focusTo = editDate;
+            }
+        }else if (editPlace.getText().toString().isEmpty()){
+            Toast toast = Toast.makeText(getApplicationContext(),"Place is required field",Toast.LENGTH_SHORT);
+            toast.show();
+            focusTo = editPlace;
+        }
 
-        comment.getText()
-         */
+        //if any required field is empty cahnge focus and halt
+        if(focusTo != null){
+            focusTo.requestFocus();
+            return;
+        }
 
-        /*Toast toast = Toast.makeText(getApplicationContext(),(txtDate.getText()+" "+txtTime.getText()+""+title.getText()+" "+place.getText()
-        + " "+comment.getText() ) ,Toast.LENGTH_SHORT);
-        toast.show();*/
-        //public VoltaData(String title, String date, String time, String place, String comment) {
-        VoltaData volta= new VoltaData(title.getText().toString(), txtDate.getText().toString(),txtTime.getText().toString(),place.getText().toString(),comment.getText().toString());
+        //transmute the time date from text to Date object
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm");
+        String dateInString = editDate.getText().toString()+ " "+ editTime.getText().toString();
+        Log.d(TAG,"dateInString : "+dateInString+"\n");
+        Date date = null;
+        try {
+            date = sdf.parse(dateInString);
+        } catch (ParseException e) {
+            Log.d(TAG, "Exception parsing date!" +"\n");
+            e.printStackTrace();
+            editDate.requestFocus();
+            return;
+        }
+        Log.d(TAG,"date:"+date+"\n");
+        //Toast.makeText(this,"date: "+date,Toast.LENGTH_SHORT).show();
 
+        VoltaData volta= new VoltaData(editTitle.getText().toString(), date, editTime.getText().toString(), editPlace.getText().toString(), editComment.getText().toString());
 
-        new SaveNewVolta(volta.getTitle(),volta.getDate(),
-                volta.getTime(),volta.getPlace(),null,
-                volta.getComment()).execute(((Void) null));
+        if(isOnline()) {
+            new SaveNewVolta(volta).execute(((Void) null));
+        }else {
+            Toast.makeText(this, "No internet connection!", Toast.LENGTH_LONG).show();
+        }
+    }
 
-
-
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+        return netInfo != null && netInfo.isConnected();
     }
 
     public class SaveNewVolta extends AsyncTask<Void, Void, Boolean> {
 
-        private final String title,place, comment;
-        private Date date=null;
+        private String title,place, comment;
+        private String dateString;
         private ArrayList<Integer> friends;
 
         private int result;
 
-        SaveNewVolta(String title,String date, String time, String place, ArrayList<Integer> friends,String comment) {
+        SaveNewVolta(VoltaData volta){
+            title = volta.getTitle();
+            place = volta.getPlace();
+            comment = volta.getComment();
 
-            this.title = title;
-            this.place = place;
-            this.comment = comment;
+            dateString = volta.getDateString();
 
-
-/*
-            try {
-
-                date+=" "+time;
-                Log.d(TAG, date);
-                Calendar mydate = new GregorianCalendar();
-//check if the format is correct
-                this.date = new SimpleDateFormat("d-M-YYYY HH:mm", Locale.ENGLISH).parse(date);
-                Log.d(TAG, this.date.toString());
-                mydate.setTime(this.date);
-                //breakdown
-               /* System.out.println("mydate -> "+mydate);
-                System.out.println("year   -> "+mydate.get(Calendar.YEAR));
-                System.out.println("month  -> "+mydate.get(Calendar.MONTH));
-                System.out.println("dom    -> "+mydate.get(Calendar.DAY_OF_MONTH));
-                System.out.println("dow    -> "+mydate.get(Calendar.DAY_OF_WEEK));
-                System.out.println("hour   -> "+mydate.get(Calendar.HOUR));
-                System.out.println("minute -> "+mydate.get(Calendar.MINUTE));
-                System.out.println("second -> "+mydate.get(Calendar.SECOND));
-                System.out.println("milli  -> "+mydate.get(Calendar.MILLISECOND));
-                System.out.println("ampm   -> "+mydate.get(Calendar.AM_PM));
-                System.out.println("hod    -> "+mydate.get(Calendar.HOUR_OF_DAY));
-            }
-            catch (ParseException e) {
-                e.printStackTrace();
-            }*/
             if (friends != null){
                 this.friends =new ArrayList<>();
                 this.friends.addAll(friends);
@@ -192,14 +198,17 @@ public class NewVoltaActivity extends BaseActivity {
                 // Building Parameters
                 HashMap<String, String> postVolta = new HashMap<>();
                 postVolta.put("title", this.title);
-                postVolta.put("date",this.date.toString());
+                postVolta.put("date",this.dateString);//note: it must be in readable format by the database
                 postVolta.put("place", this.place);
-                postVolta.put("participants", this.friends.toString());
-                postVolta.put("comment",this.comment);
+
+                // postVolta.put("participants", this.friends.toString());
+                postVolta.put("comment", this.comment);
 
                 Log.d(TAG, "starting");
+                //Log.d(TAG,"title:"+title);
                 // getting product details by making HTTP request
-                Log.d(TAG,"perform post call:"+performPostCall(SAVE_VOLTA_URL, postVolta));
+
+                result = returnCode(performPostCall(SAVE_VOLTA_URL, postVolta));
 
                 Log.d(TAG, "result: " + result);
 
@@ -212,11 +221,17 @@ public class NewVoltaActivity extends BaseActivity {
             return true;
         }
 
+        private int returnCode(String html){
+            if(html == "")
+                return 0;
+
+            return html.charAt(html.indexOf("result")+8) - 48;
+        }
+
         private String  performPostCall(String requestURL, HashMap<String, String> postDataParams) {
 
             URL url;
             String response = "";
-
 
             try {
                 url = new URL(requestURL);
@@ -225,7 +240,7 @@ public class NewVoltaActivity extends BaseActivity {
                 conn.setReadTimeout(15000);
                 conn.setConnectTimeout(15000);
                 conn.setRequestMethod("POST");
-//                conn.setDoInput(true);
+                conn.setDoInput(true);
                 conn.setDoOutput(true);
 
 
@@ -247,6 +262,8 @@ public class NewVoltaActivity extends BaseActivity {
                     while ((line=br.readLine()) != null) {
                         response+=line;
                     }
+                    //TODO: na ftiaksw ti epistrefei to site.Na epistrefei true/false analoga me tin epituxia i oxi tou query
+                    //TODO: kai analoga na enimerwnw ton xristi me toast kai isws na ton pigainoume kapou allou
                     Log.d(TAG,"epistrofi apo to site "+ response);
 
                     Spanned html =  Html.fromHtml(response);
@@ -257,33 +274,8 @@ public class NewVoltaActivity extends BaseActivity {
 
                 }
 
-
-/*
-                HttpResponse httpResponse = httpClient.execute(httpPost);
-
-                HttpEntity entity = httpResponse.getEntity();
-
-                inputStream = entity.getContent();
-
-                BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 8);
-
-                StringBuilder sb = new StringBuilder();
-
-                String line;
-
-                while ((line = reader.readLine()) != null) {
-                    sb.append(line).append("\n");
-                }
-
-                jsonString = sb.toString();
-
-                jArray = new JSONArray(jsonString);
-
-                result = jsonString;*/
-
-
             } catch (Exception e) {
-                Log.d(TAG,"exception sto perform post call");
+                Log.d(TAG,"exception sto perform post call: "+ e);
                 e.printStackTrace();
             }
 
@@ -304,17 +296,14 @@ public class NewVoltaActivity extends BaseActivity {
                 result.append(URLEncoder.encode(entry.getValue(), "UTF-8"));
             }
 
-            Log.d(TAG,"WeirdStrat"+result.toString());
             return result.toString();
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
-
-            //showProgress(false);
-
-           /* switch (result) {
-                case HttpHandler.CONNECTION_ERROR:
+            //TODO: Handle returned result
+            /*switch (result) {
+                case 0: //CONNECTION_ERROR
                     Log.d("Login Failure!", "Could not connect to database");
                     showAlertDialog("Connection Error", "Could not connect to the database, check your internet connection and try again.");
                     break;
@@ -333,9 +322,7 @@ public class NewVoltaActivity extends BaseActivity {
                     showAlertDialog("Success!", "Everything OK! Now the app will exit :(");
                     break;
             }*/
-    Toast toast = Toast.makeText(getApplicationContext(),"on post execute shit",Toast.LENGTH_SHORT);
-            toast.show();
-
+            //if success get outta here
         }
 
         @Override
