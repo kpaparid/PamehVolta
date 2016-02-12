@@ -1,50 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#300edd">
 
-
-
-    <LinearLayout android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:weightSum="2"
         android:orientation="vertical">
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border"
-            android:layout_marginTop="10dp"
-            android:paddingBottom="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Voltes!"
-                android:id="@+id/textView16"
-                android:textColor="#ffffff" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/viewA"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="1"
-            android:layout_marginTop="10dp">
+            android:layout_weight="1">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Feed"
-                android:id="@+id/txtFeed"
-                android:textColor="#ffffff" />
+                android:orientation="horizontal"
+                android:background="@drawable/border"
+                android:paddingBottom="2.5dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Feed"
+                    android:id="@+id/txtFeed"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -65,16 +56,23 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"
-            android:layout_marginBottom="10dp">
+            android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Ongoing Voltes"
-                android:id="@+id/txtNewVoltes"
-                android:textColor="#ffffff" />
+                android:orientation="horizontal"
+                android:background="@drawable/border">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:text="Ongoing Voltes"
+                    android:id="@+id/txtNewVoltes"
+                    android:textColor="#ffffff" />
+
+            </LinearLayout>
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -100,6 +98,5 @@
         android:clickable="true"
         app:layout_anchor="@id/viewB"
         app:layout_anchorGravity="bottom|right|end"/>
-
 
 </android.support.design.widget.CoordinatorLayout>
