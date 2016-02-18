@@ -6,6 +6,7 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
 import android.text.Html;
@@ -15,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import com.csd.pahmehvolta.BaseActivity;
@@ -93,7 +96,7 @@ public class NewVoltaActivity extends BaseActivity {
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
         DatePickerDialog dialog = new DatePickerDialog(this,
-                new CustomDatePicker(editDate), mYear, mMonth, mDay);
+                new CustomDatePicker(editDate,this), mYear, mMonth, mDay);
         dialog.getDatePicker().setMinDate(System.currentTimeMillis());
         dialog.show();
 
@@ -109,6 +112,12 @@ public class NewVoltaActivity extends BaseActivity {
 
     public void saveVolta(View view)
     {
+
+        if(!isOnline()){
+            Toast.makeText(this, "No internet connection!", Toast.LENGTH_LONG).show();
+            return;
+        }
+
         View focusTo=null;
 
         if (editTitle.getText().toString().isEmpty()){
@@ -135,6 +144,7 @@ public class NewVoltaActivity extends BaseActivity {
         //if any required field is empty cahnge focus and halt
         if(focusTo != null){
             focusTo.requestFocus();
+            openKeyboard();
             return;
         }
 
@@ -148,7 +158,10 @@ public class NewVoltaActivity extends BaseActivity {
         } catch (ParseException e) {
             Log.d(TAG, "Exception parsing date!" +"\n");
             e.printStackTrace();
+
             editDate.requestFocus();
+            openKeyboard();
+
             return;
         }
         Log.d(TAG,"date:"+date+"\n");
@@ -156,10 +169,13 @@ public class NewVoltaActivity extends BaseActivity {
 
         VoltaData volta= new VoltaData(editTitle.getText().toString(), date, editTime.getText().toString(), editPlace.getText().toString(), editComment.getText().toString());
 
-        if(isOnline()) {
-            new SaveNewVolta(volta).execute(((Void) null));
-        }else {
-            Toast.makeText(this, "No internet connection!", Toast.LENGTH_LONG).show();
+        new SaveNewVolta(volta).execute(((Void) null));
+    }
+
+    private void openKeyboard(){
+        InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        if (inputMethodManager != null) {
+            inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
         }
     }
 
@@ -333,8 +349,8 @@ public class NewVoltaActivity extends BaseActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+          // Handle action bar item clicks here. The action bar will
+         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 

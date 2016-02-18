@@ -26,8 +26,8 @@ public class TimePicker extends DialogFragment{
         TimeSettings settings = new TimeSettings(getActivity());
         settings.setEditText(txtTime);
         TimePickerDialog dialog;
-
-        dialog = new TimePickerDialog(getActivity(), settings, Calendar.HOUR_OF_DAY, Calendar.MINUTE, false);
+        Calendar c = Calendar.getInstance();
+        dialog = new TimePickerDialog(getActivity(), settings, c.get(Calendar.HOUR_OF_DAY), c.get(Calendar.MINUTE), false);
 
         return dialog;
 
